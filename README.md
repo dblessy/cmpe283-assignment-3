@@ -100,7 +100,7 @@ virt-install --name ubuntu-vm \
 
 Login to the new vm
 ```shell
-virsh connect qemu:///ubuntu-vm
+virsh --connect qemu:///system console ubuntu-vm
 ```
 
 login using the credentials ubuntu:secretpassword
