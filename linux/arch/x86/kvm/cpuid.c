@@ -1244,9 +1244,9 @@ int kvm_emulate_cpuid(struct kvm_vcpu *vcpu)
 
 	eax = kvm_rax_read(vcpu);
 	ecx = kvm_rcx_read(vcpu);
-	if (eax == 0x4FFFFFFF) {
+	if (eax == 0x4FFFFFFC) {
 		eax = total_calls;
-	} else if (eax == 0x4FFFFFFE) {
+	} else if (eax == 0x4FFFFFFD) {
 		ebx = (total_time >> 32);
 		ecx = (total_time & 0xFFFFFFFF );	
 	} else {

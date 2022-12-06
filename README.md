@@ -115,12 +115,9 @@ apt-get install cpuid
 Test the output of the new leaf nodes using:
 
 ```shell
-cpuid --leaf=0x4FFFFFFF
-cpuid --leaf=0x4FFFFFFE
+cpuid --leaf=0x4FFFFFFC
+cpuid --leaf=0x4FFFFFFD
 ```
-
-A sample output is as follows
-![](./cpuid.png)
 
 Running a sample python program to emit the total calls and cpu cycles shows and output like:
 ![](./sample.png)
