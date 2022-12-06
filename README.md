@@ -74,7 +74,7 @@ utilities from KVM to be installed. It can be done using:
 apt install qemu qemu-kvm libvirt-daemon libvirt-clients bridge-utils virt-manager cloud-image-utils libguestfs-tools
 mkdir ~/images
 cd ~/images
-wget ""
+wget "http://cloud-images.ubuntu.com/releases/22.04/release/ubuntu-22.04-server-cloudimg-amd64.img"
 ```
 
 ```shell
@@ -88,7 +88,8 @@ EOF
 
 Create a virtual disk and start up an inner VM using the same
 ```shell
-qemu-img create -b  -F qcow2 -f qcow2 ubuntu-vm-disk.qcow2 5G
+cloud-localds user-data.img user-data.txt
+qemu-img create -b ubuntu-22.04-server-cloudimg-amd64.img -F qcow2 -f qcow2 ubuntu-vm-disk.qcow2 4G
 virt-install --name ubuntu-vm \
   --virt-type kvm --memory 2048 --vcpus 2 \
   --boot hd,menu=on \
