@@ -120,4 +120,4 @@ cpuid --leaf=0x4FFFFFFD
 ```
 
 Running a sample python program to emit the total calls and cpu cycles shows and output like:
-![](./sample.png)
+![](./output.png)
