@@ -41,14 +41,14 @@ apt-get install build-essential git
 Clone the repository
 
 ```shell
-git clone git@github.com:dblessy/cmpe283-assignment-2.git
+git clone https://github.com/dblessy/cmpe283-assignment-2
 cd cmpe283-assignment-2/linux
 ```
 
 Set up the required packages that are required for Kernel development using:
 
 ```shell
-apt-get apt-get install fakeroot ncurses-dev xz-utils libssl-dev bc flex libelf-dev bison
+apt-get install fakeroot ncurses-dev xz-utils libssl-dev bc flex libelf-dev bison
 ```
 
 Copy the .config file and set `CONFIG_SYSTEM_TRUSTED_KEYS=""` and `CONFIG_SYSTEM_REVOCATION_KEYS=""`
