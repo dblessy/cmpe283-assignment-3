@@ -132,13 +132,15 @@ Yet another sample python program was used to emit the total calls and cpu cycle
 Following is the analysis that had been performed for the questions for assignment3
 
 #### Frequency of exits
+![](./exit_count.png)
 
+The above graph was plotted by running a loop on the sample program every 5 seconds to determine the total exits performed and the delta between every 5 seconds was used to plot the graph. As seen the exit count is relatively flat except for the spikes which should be an underlying vm operation that may have been performed at the time.
 
 #### More exits performed during certain VM operations
 
 
 #### How many exits does a full reboot entail
-
+It was observed that `24003813` were performed after a full reboot was performed. The number was observed after running the test program approximately 1 minute after the reboot.
 
 #### Which are the most and least frequent exits
 
