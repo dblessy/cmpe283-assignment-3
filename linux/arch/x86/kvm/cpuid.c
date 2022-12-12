@@ -1230,10 +1230,14 @@ bool kvm_cpuid(struct kvm_vcpu *vcpu, u32 *eax, u32 *ebx,
 EXPORT_SYMBOL_GPL(kvm_cpuid);
 
 u32 total_calls;
+u32 total_calls_by_code[70] = {[0 ... 69] = 0};
 EXPORT_SYMBOL(total_calls);
+EXPORT_SYMBOL(total_calls_by_code);
 
 u64 total_time;
+u64 total_time_by_code[70] = {[0 ... 69] = 0};
 EXPORT_SYMBOL(total_time);
+EXPORT_SYMBOL(total_time_by_code);
 
 int kvm_emulate_cpuid(struct kvm_vcpu *vcpu)
 {
@@ -1249,6 +1253,24 @@ int kvm_emulate_cpuid(struct kvm_vcpu *vcpu)
 	} else if (eax == 0x4FFFFFFD) {
 		ebx = (total_time >> 32);
 		ecx = (total_time & 0xFFFFFFFF );	
+	} else if (eax == 0x4FFFFFFE) {
+       		if (ecx < 0 || ecx >= 70 || 
+			ecx == 35 || ecx == 38 || ecx == 42) {
+			eax = ebx = ecx = 0;
+			edx = 0XFFFFFFFF;
+		} else {
+			eax = total_calls_by_code[ecx];
+		}
+	} else if (eax == 0x4FFFFFFF) {
+                if (ecx < 0 || ecx >= 70 ||
+                        ecx == 35 || ecx == 38 || ecx == 42) { 
+                        eax = ebx = ecx = 0;
+                        edx = 0XFFFFFFFF;
+                } else {
+			u64 time = total_time_by_code[ecx];
+			ebx = (time >> 32);
+	                ecx = (time & 0xFFFFFFFF );
+		}
 	} else {
 		kvm_cpuid(vcpu, &eax, &ebx, &ecx, &edx, false);
 	}

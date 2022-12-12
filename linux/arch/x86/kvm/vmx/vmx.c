@@ -5954,7 +5954,9 @@ void dump_vmcs(struct kvm_vcpu *vcpu)
 }
 
 extern u32 total_calls;
+extern u64 total_calls_by_code[70];
 extern u64 total_time;
+extern u64 total_time_by_code[70];
 /*
  * The guest has exited.  See if we can fix it or if we need userspace
  * assistance.
@@ -6139,11 +6141,17 @@ unexpected_vmexit:
 static int vmx_handle_exit(struct kvm_vcpu *vcpu, fastpath_t exit_fastpath)
 {
 	// time the calling of __vm_handle_exit to determine the time spend handing the request
-	u64 begin = rdtsc(); 
+	u64 begin = rdtsc();
+	struct vcpu_vmx *vmx = to_vmx(vcpu);
+	u32 exit_reason = vmx->exit_reason.basic;	
 	int ret = __vmx_handle_exit(vcpu, exit_fastpath);
-	
-	total_time += (rdtsc() - begin);
+	u64 duration = rdtsc() - begin;
+
+	total_time += duration;
 	total_calls ++;
+
+	total_calls_by_code[exit_reason] ++;
+	total_time_by_code[exit_reason] += duration;
 	
 	/*
 	 * Exit to user space when bus lock detected to inform that there is
