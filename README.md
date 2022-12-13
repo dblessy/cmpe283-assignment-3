@@ -137,7 +137,7 @@ Following is the analysis that had been performed for the questions for assignme
 The above graph was plotted by running a loop on the sample program every 5 seconds to determine the total exits performed and the delta between every 5 seconds was used to plot the graph. As seen the exit count is relatively flat except for the spikes which should be an underlying vm operation that may have been performed at the time.
 
 #### More exits performed during certain VM operations
-Exceptions and non-mappable interrupts were seen as the one that was generating the most exits. Common VM operations that generate more exits are vm resume, vm launch, vm write, vm read, vmx on, vmx off. 
+Exceptions and non-mappable interrupts were seen as the one that was generating the most exits. Common VM operations that generate more exits are CPUID, programs that perform register accesses, RDMSR etc. 
 
 #### How many exits does a full reboot entail
 It was observed that `24003813` were performed after a full reboot was performed. The number was observed after running the test program approximately 1 minute after the reboot.
@@ -146,18 +146,23 @@ It was observed that `24003813` were performed after a full reboot was performed
 Following are the non-zero exits that were seen:
 
 ```shell
-0 = 4532749
-2 = 77961
-14 = 276836
-20 = 498904
-24 = 210113
-28 = 432306
-36 = 25398
-56 = 16992118
-58 = 4
-60 = 618370
-62 = 16687
-64 = 935522
-66 = 23666
+0 = 814138
+1 = 17333
+7 = 73719
+10 = 203877
+12 = 21556
+14 = 101060
+18 = 3111
+28 = 4132666
+29 = 2
+30 = 267949
+31 = 1176
+32 = 175083
+33 = 11822
+46 = 5
+47 = 2
+54 = 8
+55 = 3
+58 = 61995
 ```
-Rest were all `0`. The most common exits as seen were APIC Write(56), XRSTORS(64), Exception or Non Maskable Interrupt(0), ENCLS(60).
+Rest were all `0`. The most common exits as seen were CPUID(10), Control-register accesses(28), Exception or non-maskable interrupt(NMI) (0), WRMSR(32).
