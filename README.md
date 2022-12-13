@@ -1,4 +1,4 @@
-# Assignment 2
+# Assignment 3
 
 ## Prerequisites 
 
@@ -116,12 +116,9 @@ apt-get install cpuid
 Test the output of the new leaf nodes using:
 
 ```shell
-cpuid --leaf=0x4FFFFFFC
-cpuid --leaf=0x4FFFFFFD
+cpuid -l 0x4FFFFFFE -s 10
+cpuid -l 0x4FFFFFFE -s 32
 ```
-
-Running a sample python program to emit the total calls and cpu cycles shows and output like:
-![](./output.png)
 
 Yet another sample python program was used to emit the total calls and cpu cycles per exit code. For a code that the SDM doesn't prescribe `not defined` was printed out.
 
@@ -129,6 +126,7 @@ Yet another sample python program was used to emit the total calls and cpu cycle
 
 ![](./leaf4.png)
 
+### Questions
 Following is the analysis that had been performed for the questions for assignment3
 
 #### Frequency of exits
